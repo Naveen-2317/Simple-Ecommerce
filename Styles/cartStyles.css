@@ -186,9 +186,7 @@ h3.productTitle {
         z-index: -999px;
     }
 }
-/* hr {
-    width: 60%;
-} */
+
 .product-title {
     white-space: normal;       /* Allows text to wrap */
     word-wrap: break-word;     /* Breaks long words */
