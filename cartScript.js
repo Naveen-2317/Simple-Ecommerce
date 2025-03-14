@@ -75,7 +75,7 @@ $(document).ready(function () {
     //User logout
     $(document).on('click', '.logout', function () {
         $('#user').html('');
-        $(this).replaceWith('<a href="/simpleEcom/signin.html" id="SignIn">SignIn</a>');
+        $(this).replaceWith('<a href="/signin.html" id="SignIn">SignIn</a>');
         sessionStorage.clear();
         location.reload();
     });

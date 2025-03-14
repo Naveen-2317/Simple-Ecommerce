@@ -4,18 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jewellery</title>
+    <title>All products</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="/Styles/cartStyles.css">
-    <script src="/Scripts/cartScript.js"></script>
+    <script src="/cartScript.js"></script>
+    <link rel="stylesheet" href="/cartStyles.css">
+    <!-- Link to Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 
 <body>
+
     <nav>
         <h2 class="imageGallary">E-Commerce</h2>
-        <b><img src="/Images/market.png" alt="" id="cartImage"></b>
+        <b><img src="/market.png" alt="" id="cartImage"></b>
         <ul>
-            <li><a href="/HTML/home.html">Home</a></li>
+            <li><a href="/home.html">Home</a></li>
             <li>Jewellery</li>
             <li>Women'sCloths</li>
             <li>Men'sCloths</li>
@@ -26,13 +29,13 @@
         <div id="cart">Total : ₹ <span id="cartTotal">0.0</span> </div>
         <div id="login">
             <b><span id="user"></span></b>
-            <a href="/HTML/signin.html" id="SignIn">SignIn</a>
+            <a href="/signin.html" id="SignIn">SignIn</a>
         </div>
     </nav>
     <div id="gallery"></div>
     <script>
-       $.ajax({
-            url: "https://fakestoreapi.com/products/category/jewelery",
+        $.ajax({
+            url: "https://fakestoreapi.com/products",
             method: "GET",
             dataType: "JSON",
             success: function (response) {
@@ -47,18 +50,22 @@
                 </div>
             `);
                 });
+
                 $(".images").on("click", function () {
                     let productData = JSON.parse(decodeURIComponent($(this).attr("data-product")));
                     localStorage.setItem("productData", JSON.stringify(productData)); // Stringify the object
                     location.href = "pdp.html";
                 });
+
             },
             error: function (error) {
                 console.log(error);
-
             }
         });
+
+
     </script>
+
 </body>
 
 </html>
