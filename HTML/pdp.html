@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDP</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/Styles/cartStyles.css">
+    <script src="/Scripts/cartScript.js"></script>
+</head>
+<body>
+    <nav>
+        <h2 class="imageGallary">E-Commerce</h2>
+        <b><img src="/Images/market.png" alt="" id="cartImage"></b>
+        <ul>
+            <li><a href="/HTML/home.html">Home</a></li>
+            <li>Jewellery</li>
+            <li>Women'sCloths</li>
+            <li>Men'sCloths</li>
+            <li>Electronics</li>
+            <li>All Products</li>
+        </ul>
+        <b><span id="count">0</span></b>
+        <div id="cart">Total : <span id="cartTotal">0.0</span> </div>
+        <div id="login">
+            <b><span id="user"></span></b>
+            <a href="/HTML/signin.html" id="SignIn">SignIn</a>
+        </div>
+    </nav>
+    <div class="body">
+        <div class="div1">
+            <img src="" alt="" class="pdpImg">
+        </div>
+        <div class="div2">
+            <h3 class="productTitle"></h2>
+            <b><span class="productRating"></span>&nbsp;&nbsp;(<span class="reviewCount"></span>)</b> <br><br>
+            <b>₹&nbsp;<span class="productPrice"></span></b> <br> <br>
+            <button class="btn" >Add to Bag</button>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            let productData = localStorage.getItem("productData");
+            let product = JSON.parse(productData);            
+            $('.pdpImg').attr('src',product.image);
+            $('.productTitle').html(product.title);
+            $('.productRating').html(product.rating.rate)
+            $('.reviewCount').html(product.rating.count)
+            $('.productPrice').html(product.price)
+            $('.btn').attr({'data-price':product.price,'data-id':product.id});
+        })
+    </script>
+</body>
+</html>

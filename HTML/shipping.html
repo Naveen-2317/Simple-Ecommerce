@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shipping</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/Scripts/cartScript.js"></script>
+    <link rel="stylesheet" href="/Styles/cartStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+    <a href="/HTML/home.html" class="backToShopping">Back to Shopping</a>
+    <hr>
+    <div class="shippingForm">
+        <h2>Delivery</h4>
+            <h3>Enter Your Address Here</h4>
+                <form action="">
+                    <div>
+                        <input type="text" placeholder="Firstname" id="firstName" required>
+                        <input type="text" placeholder="Lastname" id="lastName" required>
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Street Address" id="address" required>
+                        <input type="email" placeholder="Eamil" id="email" required>
+                    </div>
+                    <div>
+                        <input type="text" placeholder="State" id="state" required>
+                        <input type="text" placeholder="City" id="city" required>
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Zipcode" id="zipcode" required>
+                        <input type="text" placeholder="Phone Number" id="phone" required>
+                    </div>  
+                    <div style="margin: 20px;">
+                        <input type="radio" name="shippingMethod" value="Standard Delivery">Standard Delivery
+                        <input type="radio" name="shippingMethod" value="Express Delivery">Express Delivery
+                    </div>
+                    <button type="submit" class="shipping-btn">Continue to Billing</button>
+                </form>
+                
+                
+    </div>
+    <script>
+        $(document).ready(function () {
+            // Auto-fill form from localStorage
+            function autofillForm() {
+                let userDetails = JSON.parse(localStorage.getItem("userDetails"));
+                if (userDetails) {
+                    $("#firstName").val(userDetails.firstName || "");
+                    $("#lastName").val(userDetails.lastName || "");
+                    $("#email").val(userDetails.email || "");
+                    $("#address").val(userDetails.address || "");
+                    $("#city").val(userDetails.city || "");
+                    $("#state").val(userDetails.state || "");
+                    $("#zipcode").val(userDetails.zipcode || "");
+                    $("#phone").val(userDetails.phone || "");
+                }
+            }
+
+            // Save form data and redirect on submit
+            $(".shippingForm").submit(function (event) {
+                event.preventDefault();
+
+                let userDetails = {
+                    firstName: $("#firstName").val(),
+                    lastName: $("#lastName").val(),
+                    email: $("#email").val(),
+                    address: $("#address").val(),
+                    city: $("#city").val(),
+                    state: $("#state").val(),
+                    zipcode: $("#zipcode").val(),
+                    phone: $("#phone").val(),
+                    shippingMethod : $("input[name='shippingMethod']:checked").val()
+                };
+
+                // Store data in localStorage
+                localStorage.setItem("userDetails", JSON.stringify(userDetails));
+
+                // Redirect to payment page
+                window.location.href = "payment.html";
+            });
+
+            // Auto-fill on page load
+            autofillForm();
+        });
+
+    </script>
+</body>
+
+</html>

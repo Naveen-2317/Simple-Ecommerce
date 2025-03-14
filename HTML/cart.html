@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/Scripts/cartScript.js"></script>
+    <link rel="stylesheet" href="/Styles/cartStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+    <nav>
+        <h2 class="imageGallary">E-Commerce</h2>
+        <b><img src="/Images/market.png" alt="" id="cartImage"></b>
+        <ul>
+            <li><a href="/HTML/home.html">Home</a></li>
+            <li>Jewellery</li>
+            <li>Women'sCloths</li>
+            <li>Men'sCloths</li>
+            <li>Electronics</li>
+            <li>All Products</li>
+        </ul>
+        <b><span id="count">0</span></b>
+        <div id="cart">Total : ₹ <span id="cartTotal">0.0</span> </div>
+        <div id="login">
+            <b><span id="user"></span></b>
+            <a href="/HTML/signin.html" id="SignIn">SignIn</a>
+        </div>
+    </nav>
+    <div id="cartItems"></div>
+    <div class="checkout-btn"><button>Checkout</button></div>
+    <script>
+        $(document).ready(async function () {
+            let productIds = JSON.parse(sessionStorage.getItem('buttonIds')) || [];
+            let cartItems = $('#cartItems');
+
+            async function fetchProduct(id) {
+                try {
+                    let response = await $.ajax({
+                        url: `https://fakestoreapi.com/products/${id}`,
+                        method: "GET"
+                    });
+                    return response;
+                } catch (error) {
+                    console.error(`Failed to fetch product with ID: ${id}`);
+                    return null;
+                }
+            }
+
+            for (let id of productIds) {
+                let product = await fetchProduct(id);
+                if (product) {
+                    let productHtml = `
+                <div class="product-item" data-id='${product.id}' data-price='${product.price}'>
+                    <img src="${product.image}" alt="${product.title}" style="width: 100px; height: 100px;">
+                    <div class="productData">
+                        <p>${product.title}</p>
+                        <p class="product-price" data-price='${product.price}'>Price: ₹ ${product.price}</p>
+                    </div>
+                    <img src="/Images/deleteIcon.png" class='remove-btn'>
+                </div>
+            `;
+                    cartItems.append(productHtml);
+                }
+            }
+        });
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/Scrits/cartScript.js"></script>
+    <link rel="stylesheet" href="/Styles/cartStyles.css">
+
+</head>
+
+<body>
+    <a href="/HTML/home.html" class="backToShopping">Back to Shopping</a>
+    <hr>
+    <div class="paymentform">
+        <h2>Payment</h2>
+        <form id="mock-payment-form">
+            <div>
+                <input type="text" id="cardholder-name" placeholder="Cardholder Name" autocomplete="off" required>
+                <input type="text" id="card-number" placeholder="Card Number" required>
+            </div>
+            <div>
+            </div>
+            <div>
+                <input type="text" id="expiry-date" placeholder="MM/YY" required>
+                <input type="text" id="cvv" placeholder="CVV" required>
+            </div>
+            <div>
+                <input type="text" id="amount" placeholder="Amount" required>
+            </div>
+            <button type="submit" id="pay-btn">Review order</button>
+        </form>
+
+        <!-- Display Payment Status -->
+        <div id="payment-status"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            let cartPrice = sessionStorage.getItem('cartTotal');
+            let orderId = 1000000
+            console.log(cartPrice);
+            if (cartPrice) {
+                $("#amount").val("₹" + cartPrice);
+            }
+
+            $("#mock-payment-form").submit(function (event) {
+                event.preventDefault();
+
+                let cardholderName = $("#cardholder-name").val();
+                let cardNumber = $("#card-number").val();
+                let expiryDate = $("#expiry-date").val();
+                let cvv = $("#cvv").val();
+                console.log(cardNumber,expiryDate,cvv);
+                
+
+                // card validation
+                if (cardNumber.length !== 16 || cvv.length !== 3) {
+                    $("#payment-status").html("<p style='color: red;'>Invalid card details. Please check again.</p>");
+                    return;
+                }
+                if (cartPrice) {
+                    $("#payment-status").html(`<p style='color: green;'>Payment of $${cartPrice} was successful! 🎉</p>`);
+                } else {
+                    $("#payment-status").html("<p style='color: red;'>Payment failed. Please try again. ❌</p>");
+                }
+                let paymentDetails = {
+                    cardholderName : cardholderName,
+                    cardNumber: cardNumber,
+                    expiryDate: expiryDate,
+                    cvv: cvv,
+                };
+
+                // Fetch userDetails from localStorage and parse it into an object
+                let userDetails = JSON.parse(localStorage.getItem('userDetails'));
+
+                if (userDetails) {
+                    // Add paymentDetails to the userDetails object
+                    userDetails.paymentDetails = paymentDetails;
+                    userDetails.orderId = "PD"+`${++orderId}`
+
+                    // Save the updated object back to localStorage
+                    localStorage.setItem('userDetails', JSON.stringify(userDetails));
+                    console.log('Updated userDetails:', userDetails);
+                } else {
+                    console.log('No userDetails found in localStorage.');
+                }
+
+                setTimeout(function () {
+                    location.href = "reviewOrder.html"
+                }, 2000);
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

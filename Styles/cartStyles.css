@@ -1,0 +1,239 @@
+
+html,body {
+    margin: 0;
+    padding: 0;
+}
+
+#gallery {
+    display: grid;
+    gap: 20px;
+    background-color: white;
+}
+
+@media (min-width: 1200px) {
+    #gallery {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    #gallery {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    #gallery {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+
+
+.imageGallary {
+    text-align: center;
+    margin: 0px;
+}
+
+.image-item {
+    text-align: center;
+    margin: 20px;
+}
+
+.images {
+    width: 60%;
+    height: 60%;
+}
+
+.price {
+    margin: 10px;
+}
+
+#cart {
+    position: absolute;
+    top: 28px;
+    right: 100px;
+}
+
+#cartImage {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 20px;
+    right: 200px;
+}
+
+#count {
+    position: absolute;
+    top: 30px;
+    right: 210px;
+}
+
+nav {
+    position: sticky;
+    top: 0px;
+    background-color: #fff;
+    height: 100px;
+    z-index: 999;
+    /* opacity: .8; */
+}
+.sub-nav {
+    position: relative;
+}
+
+#login {
+    position: absolute;
+    top: 70px;
+    right: 90px;
+    color: black;
+
+    #user,
+    .logout,
+    a {
+        /* margin: 10px; */
+        padding: 10px;
+        text-decoration: none;
+        color: black;
+        cursor: pointer;
+    }
+}
+
+#viewport {
+    img {
+        width: 100%;
+        height: 100%;
+        margin: -2px;
+        padding: 0;
+    }
+}
+
+ul {
+    list-style-type: none;
+    text-align: center;
+
+    li {
+        display: inline;
+        margin: 0px 20px;
+        cursor: pointer;
+        font-weight: bold;
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    }
+}
+
+.body {
+    display: flex;
+    .div1 {
+        width: 50%;
+        height: 50%;
+        box-sizing: border-box;
+    
+        .pdpImg {
+            height: 35%;
+            width: 40%;
+            margin-left: 300px;
+            margin-top: 50px;
+        }
+    }
+    
+    .div2 {
+        width: 50%;
+        height: 50%;
+        margin: 20px;
+    }
+}
+
+div.productTitle {
+font-size: .9rem;
+margin: 0.5rem;
+}
+
+.btn {
+    width: 100px;
+    background-color: rgb(119, 119, 207);
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 10px;
+    height: 40px;
+}
+
+h3.productTitle {
+        word-wrap: break-word;      /* Legacy, widely supported */
+        overflow-wrap: break-word;  /* Modern standard */
+        white-space: normal;        /* Allows wrapping */
+        width: 500px;               /* Limit width for wrapping */
+        padding: 10px;
+}
+.product-item {
+    position: relative;
+    display: flex;
+    margin-top: 20px;
+    img {
+        margin-left: 300px;
+    }
+    .productData {
+        margin-left: 100px;
+    }
+    .remove-btn {
+        position: absolute;
+        margin-left: 100px;
+        right: 300px;
+        height: 20px;
+        z-index: -999px;
+    }
+}
+/* hr {
+    width: 60%;
+} */
+.product-title {
+    white-space: normal;       /* Allows text to wrap */
+    word-wrap: break-word;     /* Breaks long words */
+    overflow-wrap: break-word; /* Ensures long words break */
+    max-width: 250px;          /* Set a max width (adjust as needed) */
+    text-overflow: ellipsis;   /* Adds ellipsis for overflow text */
+}
+.checkout-btn {
+    text-align: center;
+    margin-top: 10px;
+}
+button {
+    width: 300px;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: rgb(119, 119, 207);
+    color: #fff;
+    border: none;
+}
+
+.shippingForm,.paymentform {
+    /* display: grid; */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 150px;
+    input:not([type="radio"]){
+        margin: 10px;
+        width: 200px;
+        height: 25px;
+        
+    }
+}
+.backToShopping {
+    text-decoration: none;
+    position: relative;
+    left: 10px;
+    top: 15px;
+    font-size: 1.1rem;
+    color: black;
+}
+hr {
+    margin-top: 30px;
+}
+
+.orderNumber {
+    margin-left: 50px;
+}

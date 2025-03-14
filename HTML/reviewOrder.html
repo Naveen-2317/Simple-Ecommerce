@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Order</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/Styles/cartStyles.css">
+</head>
+<style>
+    .shippingInfo {
+        padding: 20px;
+    }
+
+    .ship {
+        margin: 20px 10px;
+        display: flex;
+
+        h3 {
+            margin: 0;
+            position: relative;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+            position: absolute;
+            left: 500px;
+        }
+    }
+
+    .delivery {
+        display: grid;
+        margin: 20px 10px;
+
+        h4 {
+            margin: 0;
+        }
+    }
+
+    .shipping {
+        display: grid;
+        margin: 20px 10px;
+        position: absolute;
+        left: 750px;
+        top: 150px;
+
+        h4 {
+            margin: 0;
+        }
+    }
+
+    .contact {
+        display: grid;
+        margin: 20px 10px;
+        position: absolute;
+        left: 750px;
+        top: 220px;
+
+        h4 {
+            margin: 0;
+        }
+    }
+
+    .editShipDetails {
+        position: absolute;
+        left: 350px;
+    }
+
+    .paymentDetalis {
+        padding: 30px;
+    }
+
+    .editPayment {
+        margin-left: 190px;
+    }
+
+    .cardholderName,
+    .cardNumber {
+        margin: 20px 0px;
+    }
+
+    tr,
+    td {
+        margin: 30px;
+        /* Adds space between rows */
+        /* display: block; Note: this breaks normal table layout */
+    }
+    .order {
+        margin-top: 10px;
+        margin: 0px;
+        margin-left: 20px;
+    }
+    .completeDiv {
+        /* background-color: rgb(240, 240, 233); */
+        /* text-align: center; */
+        display: grid;
+        /* text-align: center; */
+        justify-content: center;
+        
+    }
+    body {
+        background-color: rgb(242, 242, 236);
+    }
+</style>
+
+<body>
+    <a href="home.html" class="backToShopping">Back to Shopping</a>
+    <hr>
+    <div class="completeDiv">
+        <h3 class="order">OrderNumber <span class="orderNumber"></span> </h3>
+        <div class="shippingInfo">
+            <div class="ship">
+                <h3>Shipping & Delivery Details</h3>
+            </div>
+            <div class="delivery">
+                <h4>Delivery Address</h3>
+                    <span class="firstName"></span><span class="lastName"></span>
+                    <span class="address"></span>
+                    <span class="city"></span>
+                    <span class="phone"></span>
+            </div>
+            <div class="shipping">
+                <h4>Shipping Method</h3>
+                    <span class="shippingMethod"></span>
+            </div>
+            <div class="contact">
+                <h4>Contact Information</h3>
+                    <span class="email"></span>
+            </div>
+        </div>
+        <div class="paymentDetalis">
+
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <h3>Payment Details</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="cardholderName"></span></td>
+                        <td><span class="cardNumber"></span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="expiryDate"></span></td>
+                        <td><span class="cvv"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        let userDetails = JSON.parse(localStorage.getItem('userDetails'));
+        console.log(userDetails.firstName, userDetails.lastName);
+        let cardNumber = userDetails.paymentDetails.cardNumber;
+        let maskedCard = cardNumber.slice(-4).padStart(cardNumber.length, "*")
+
+        $('.firstName').html(userDetails.firstName);
+        $('span.lastName').html(userDetails.lastName);
+        $('.address').html(userDetails.address);
+        $('.city').html(userDetails.city);
+        $('.phone').html(userDetails.phone);
+        $('.shippingMethod').html(userDetails.shippingMethod);
+        $('.email').html(userDetails.email);
+        $('.cardholderName').html(userDetails.paymentDetails.cardholderName);
+        $('.cardNumber').html(maskedCard);
+        $('.expiryDate').html(userDetails.paymentDetails.expiryDate);
+        $('.cvv').html(userDetails.paymentDetails.cvv);
+        $('.orderNumber').html(userDetails.orderId);
+        sessionStorage.clear();
+        
+
+    });
+</script>
+
+</html>
